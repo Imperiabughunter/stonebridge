@@ -7,48 +7,105 @@ const cancelContact = document.getElementById('cancel-contact');
 const cookieBanner = document.getElementById('cookie-banner');
 const acceptCookies = document.getElementById('accept-cookies');
 
-// Enhanced Mobile Navigation Toggle
+// Enhanced Mobile Navigation Toggle - Fixed version
 function initMobileNavigation() {
     if (navToggle && mobileMenu) {
-        // Add both click and touchstart events for better mobile support
-        ['click', 'touchstart'].forEach(eventType => {
-            navToggle.addEventListener(eventType, (e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                mobileMenu.classList.toggle('active');
-                
-                // Animate hamburger icon
-                const bars = navToggle.querySelectorAll('.bar');
-                if (bars.length > 0) {
-                    bars.forEach((bar, index) => {
-                        if (mobileMenu.classList.contains('active')) {
-                            if (index === 0) {
-                                bar.style.transform = 'rotate(45deg) translate(5px, 5px)';
-                            } else if (index === 1) {
-                                bar.style.opacity = '0';
-                            } else {
-                                bar.style.transform = 'rotate(-45deg) translate(7px, -6px)';
-                            }
-                        } else {
-                            bar.style.transform = 'none';
-                            bar.style.opacity = '1';
-                        }
-                    });
+        console.log('Initializing mobile navigation...');
+        
+        // Remove any existing event listeners to prevent duplicates
+        const newNavToggle = navToggle.cloneNode(true);
+        navToggle.parentNode.replaceChild(newNavToggle, navToggle);
+        
+        // Get the new reference
+        const updatedNavToggle = document.querySelector('.nav-toggle');
+        
+        // Function to toggle menu and animate icon
+        function toggleMenu() {
+            mobileMenu.classList.toggle('active');
+            
+            // Animate hamburger icon
+            const bars = updatedNavToggle.querySelectorAll('.bar');
+            if (bars.length === 3) {
+                if (mobileMenu.classList.contains('active')) {
+                    // Transform to X
+                    bars[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    bars[1].style.opacity = '0';
+                    bars[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                } else {
+                    // Reset to hamburger
+                    bars[0].style.transform = 'none';
+                    bars[1].style.opacity = '1';
+                    bars[2].style.transform = 'none';
                 }
+            }
+        }
+        
+        // Add click event listener
+        updatedNavToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Hamburger clicked!');
+            toggleMenu();
+        });
+        
+        // Add touch event listener for mobile
+        updatedNavToggle.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Hamburger touched!');
+            toggleMenu();
+        });
+        
+        // Add event listeners to individual bars for better touch targets
+        const bars = updatedNavToggle.querySelectorAll('.bar');
+        bars.forEach((bar, index) => {
+            bar.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log(`Bar ${index} clicked!`);
+                toggleMenu();
+            });
+            
+            bar.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log(`Bar ${index} touched!`);
+                toggleMenu();
             });
         });
+        
+        console.log('Mobile navigation initialized successfully');
+        return updatedNavToggle;
+    } else {
+        console.log('Nav toggle or mobile menu not found');
+        return null;
     }
 }
 
-// Initialize mobile navigation
-document.addEventListener('DOMContentLoaded', () => {
-    initMobileNavigation();
-    
-    // Close mobile menu when clicking on links
+// Close mobile menu when clicking on links
+function initMobileLinks() {
     const mobileLinks = document.querySelectorAll('.mobile-link');
     mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (mobileMenu) {
+        link.addEventListener('click', function(e) {
+            if (mobileMenu && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                // Reset hamburger icon
+                const bars = navToggle ? navToggle.querySelectorAll('.bar') : document.querySelectorAll('.bar');
+                bars.forEach(bar => {
+                    bar.style.transform = 'none';
+                    bar.style.opacity = '1';
+                });
+            }
+        });
+    });
+}
+
+// Close mobile menu when clicking outside
+function initOutsideClick() {
+    document.addEventListener('click', function(e) {
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+            const navToggle = document.querySelector('.nav-toggle');
+            if (navToggle && !mobileMenu.contains(e.target) && !navToggle.contains(e.target)) {
                 mobileMenu.classList.remove('active');
                 // Reset hamburger icon
                 const bars = navToggle.querySelectorAll('.bar');
@@ -57,8 +114,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     bar.style.opacity = '1';
                 });
             }
-        });
+        }
     });
+}
+
+// Initialize all mobile functionality
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing mobile navigation...');
+    initMobileNavigation();
+    initMobileLinks();
+    initOutsideClick();
+});
+
+// Also initialize on window load to ensure everything is ready
+window.addEventListener('load', function() {
+    console.log('Window loaded, re-initializing mobile navigation...');
+    initMobileNavigation();
+    initMobileLinks();
 });
 
 // Contact Form Toggle
@@ -134,7 +206,7 @@ if (acceptCookies) {
         localStorage.setItem('cookiesAccepted', 'true');
         cookieBanner.classList.add('hidden');
     });
-});
+}
 
 // Smooth Scrolling for Anchor Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -212,21 +284,6 @@ attachButtons.forEach(button => {
     });
 });
 
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (mobileMenu && navToggle) {
-        if (!mobileMenu.contains(e.target) && !navToggle.contains(e.target)) {
-            mobileMenu.classList.remove('active');
-            // Reset hamburger icon
-            const bars = navToggle.querySelectorAll('.bar');
-            bars.forEach(bar => {
-                bar.style.transform = 'none';
-                bar.style.opacity = '1';
-            });
-        }
-    }
-});
-
 // Window resize handling
 window.addEventListener('resize', () => {
     if (window.innerWidth >= 768) {
@@ -234,6 +291,7 @@ window.addEventListener('resize', () => {
             mobileMenu.classList.remove('active');
         }
         // Reset hamburger icon
+        const navToggle = document.querySelector('.nav-toggle');
         if (navToggle) {
             const bars = navToggle.querySelectorAll('.bar');
             bars.forEach(bar => {

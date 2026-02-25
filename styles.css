@@ -110,12 +110,14 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     cursor: pointer;
     gap: 4px;
-    padding: 10px;
+    padding: 12px;
     z-index: 1003;
     background: transparent;
     border: none;
     position: relative;
     touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 .bar {
@@ -138,6 +140,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     right: 0;
     z-index: 1002;
+    width: 100%;
 }
 
 .mobile-menu.active {
@@ -233,9 +236,9 @@ main {
     font-size: clamp(1.25rem, 4vw, 2.5rem);
     font-weight: 800;
     color: var(--light-text);
-    line-height: 0.9;
-    letter-spacing: -0.03em;
-    margin-bottom: 2rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 1s ease-out 0.3s forwards;
@@ -1135,26 +1138,56 @@ body::before {
     /* Mobile Hero Text Fixes */
     .hero-title {
         color: var(--primary-text);
-        font-size: clamp(1.5rem, 6vw, 2rem);
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+        line-height: 1.1;
     }
     
     .hero-description {
         color: var(--primary-text);
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+        line-height: 1.5;
     }
     
     /* Ensure hero content is visible on mobile */
     .hero-content {
         z-index: 3;
         padding-top: 2rem;
+        padding: 0 1rem;
     }
     
     .hero-content-center {
         z-index: 3;
+        padding: 0 1rem;
     }
     
     .hero-content-split {
         z-index: 3;
         padding-top: 8rem; /* More padding for mobile to account for navbar */
+        padding: 0 1rem;
+    }
+    
+    /* Mobile Navigation Enhancements */
+    .nav-toggle {
+        padding: 15px 12px;
+    }
+    
+    .bar {
+        width: 28px;
+        height: 3px;
+    }
+    
+    .mobile-menu {
+        padding: 2rem 1.5rem;
+    }
+    
+    .mobile-link {
+        font-size: 1.25rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+    }
+    
+    .mobile-link:last-child {
+        border-bottom: none;
     }
 }
 
@@ -1170,6 +1203,11 @@ body::before {
     
     .nav-toggle.mobile {
         display: none;
+    }
+    
+    /* Ensure mobile menu is hidden on desktop */
+    .mobile-menu {
+        display: none !important;
     }
     
     .hero-title {
@@ -1285,10 +1323,10 @@ body::before {
 }
 
 .hero-description {
-    font-size: 1.125rem;
+    font-size: clamp(0.9rem, 3vw, 1.125rem);
     color: var(--primary-text);
-    line-height: 1.7;
-    margin-bottom: 2rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
     font-weight: 500;
 }
 
