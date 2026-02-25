@@ -55,11 +55,12 @@ h1, h2, h3, h4, h5, h6 {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 1001;
     background-color: rgba(249, 246, 240, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     padding: 1rem 0;
+    width: 100%;
 }
 
 .nav-container {
@@ -109,6 +110,12 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     cursor: pointer;
     gap: 4px;
+    padding: 10px;
+    z-index: 1003;
+    background: transparent;
+    border: none;
+    position: relative;
+    touch-action: manipulation;
 }
 
 .bar {
@@ -126,6 +133,11 @@ h1, h2, h3, h4, h5, h6 {
     border-top: 1px solid var(--border-color);
     padding: 1.5rem;
     box-shadow: var(--shadow);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1002;
 }
 
 .mobile-menu.active {
@@ -140,13 +152,19 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     color: var(--primary-text);
     text-decoration: none;
-    padding: 0.5rem 0;
+    padding: 0.75rem 0;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.mobile-link:hover {
+    color: var(--accent-color);
 }
 
 /* Main Content */
 main {
     flex: 1;
-    margin-top: 4.5rem;
+    margin-top: 70px; /* Account for fixed navbar */
 }
 
 /* Hero Section */
@@ -157,6 +175,30 @@ main {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    min-height: 500px;
+}
+
+/* Pages with background images */
+.hero.with-background {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 500px;
+}
+
+/* Pages without background images */
+.hero.no-background {
+    position: relative;
+    height: auto;
+    min-height: 50vh;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-image {
@@ -1054,6 +1096,11 @@ body::before {
 
 /* Mobile Optimizations */
 @media (max-width: 767px) {
+    .hero {
+        height: auto;
+        min-height: 70vh;
+    }
+    
     .hero-buttons {
         width: 100%;
         max-width: 300px;
@@ -1082,6 +1129,35 @@ body::before {
     .form-group textarea {
         font-size: 16px; /* Prevents zoom on iOS */
     }
+    
+    /* Mobile Hero Text Fixes */
+    .hero-title {
+        color: var(--primary-text);
+        font-size: clamp(1.5rem, 6vw, 2rem);
+    }
+    
+    .hero-description {
+        color: var(--primary-text);
+    }
+    
+    /* Ensure hero content is visible on mobile */
+    .hero {
+        height: auto;
+        min-height: 70vh;
+    }
+    
+    .hero-content {
+        z-index: 3;
+        padding-top: 2rem;
+    }
+    
+    .hero-content-center {
+        z-index: 3;
+    }
+    
+    .hero-content-split {
+        z-index: 3;
+    }
 }
 
 /* Responsive Design - Tablet and Desktop */
@@ -1100,6 +1176,14 @@ body::before {
     
     .hero-title {
         font-size: clamp(2.5rem, 5vw, 3rem);
+    }
+    
+    .hero-title.white-text {
+        color: var(--light-text);
+    }
+    
+    .hero-description.white-text {
+        color: var(--light-text);
     }
     
     .section-title {
@@ -1182,12 +1266,28 @@ body::before {
     color: var(--primary-text);
 }
 
+.hero-title.white-text {
+    color: var(--light-text);
+}
+
+.hero-title.hero-dark-bg {
+    color: var(--light-text);
+}
+
 .hero-description {
     font-size: 1.125rem;
     color: var(--primary-text);
     line-height: 1.7;
     margin-bottom: 2rem;
     font-weight: 500;
+}
+
+.hero-description.white-text {
+    color: var(--light-text);
+}
+
+.hero-description.hero-dark-bg {
+    color: var(--light-text);
 }
 
 .hero-image-placeholder {

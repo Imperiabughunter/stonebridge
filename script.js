@@ -9,24 +9,28 @@ const acceptCookies = document.getElementById('accept-cookies');
 
 // Mobile Navigation Toggle
 if (navToggle && mobileMenu) {
-    navToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('active');
-        
-        // Animate hamburger icon
-        const bars = navToggle.querySelectorAll('.bar');
-        bars.forEach((bar, index) => {
-            if (mobileMenu.classList.contains('active')) {
-                if (index === 0) {
-                    bar.style.transform = 'rotate(45deg) translate(5px, 5px)';
-                } else if (index === 1) {
-                    bar.style.opacity = '0';
+    // Add both click and touchstart events for better mobile support
+    ['click', 'touchstart'].forEach(eventType => {
+        navToggle.addEventListener(eventType, (e) => {
+            e.preventDefault();
+            mobileMenu.classList.toggle('active');
+            
+            // Animate hamburger icon
+            const bars = navToggle.querySelectorAll('.bar');
+            bars.forEach((bar, index) => {
+                if (mobileMenu.classList.contains('active')) {
+                    if (index === 0) {
+                        bar.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    } else if (index === 1) {
+                        bar.style.opacity = '0';
+                    } else {
+                        bar.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                    }
                 } else {
-                    bar.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                    bar.style.transform = 'none';
+                    bar.style.opacity = '1';
                 }
-            } else {
-                bar.style.transform = 'none';
-                bar.style.opacity = '1';
-            }
+            });
         });
     });
 }
