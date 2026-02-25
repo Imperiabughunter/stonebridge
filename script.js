@@ -87,14 +87,45 @@ function initMobileLinks() {
     const mobileLinks = document.querySelectorAll('.mobile-link');
     mobileLinks.forEach(link => {
         link.addEventListener('click', function(e) {
+            e.preventDefault();
             if (mobileMenu && mobileMenu.classList.contains('active')) {
+                console.log('Mobile link clicked, closing menu...');
                 mobileMenu.classList.remove('active');
                 // Reset hamburger icon
-                const bars = navToggle ? navToggle.querySelectorAll('.bar') : document.querySelectorAll('.bar');
-                bars.forEach(bar => {
-                    bar.style.transform = 'none';
-                    bar.style.opacity = '1';
-                });
+                const navToggle = document.querySelector('.nav-toggle');
+                if (navToggle) {
+                    const bars = navToggle.querySelectorAll('.bar');
+                    bars.forEach(bar => {
+                        bar.style.transform = 'none';
+                        bar.style.opacity = '1';
+                    });
+                }
+                // Navigate to the link after a short delay
+                setTimeout(() => {
+                    window.location.href = link.getAttribute('href');
+                }, 150);
+            }
+        });
+        
+        // Add touch support for mobile links
+        link.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            if (mobileMenu && mobileMenu.classList.contains('active')) {
+                console.log('Mobile link touched, closing menu...');
+                mobileMenu.classList.remove('active');
+                // Reset hamburger icon
+                const navToggle = document.querySelector('.nav-toggle');
+                if (navToggle) {
+                    const bars = navToggle.querySelectorAll('.bar');
+                    bars.forEach(bar => {
+                        bar.style.transform = 'none';
+                        bar.style.opacity = '1';
+                    });
+                }
+                // Navigate to the link after a short delay
+                setTimeout(() => {
+                    window.location.href = link.getAttribute('href');
+                }, 150);
             }
         });
     });
@@ -102,18 +133,47 @@ function initMobileLinks() {
 
 // Close mobile menu when clicking outside
 function initOutsideClick() {
-    document.addEventListener('click', function(e) {
+    function closeMenu() {
         if (mobileMenu && mobileMenu.classList.contains('active')) {
+            console.log('Closing menu from outside click');
+            mobileMenu.classList.remove('active');
+            // Reset hamburger icon
             const navToggle = document.querySelector('.nav-toggle');
-            if (navToggle && !mobileMenu.contains(e.target) && !navToggle.contains(e.target)) {
-                mobileMenu.classList.remove('active');
-                // Reset hamburger icon
+            if (navToggle) {
                 const bars = navToggle.querySelectorAll('.bar');
                 bars.forEach(bar => {
                     bar.style.transform = 'none';
                     bar.style.opacity = '1';
                 });
             }
+        }
+    }
+    
+    // Click event
+    document.addEventListener('click', function(e) {
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+            const navToggle = document.querySelector('.nav-toggle');
+            if (navToggle && !mobileMenu.contains(e.target) && !navToggle.contains(e.target)) {
+                closeMenu();
+            }
+        }
+    });
+    
+    // Touch event for mobile
+    document.addEventListener('touchstart', function(e) {
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+            const navToggle = document.querySelector('.nav-toggle');
+            if (navToggle && !mobileMenu.contains(e.target) && !navToggle.contains(e.target)) {
+                e.preventDefault();
+                closeMenu();
+            }
+        }
+    });
+    
+    // Escape key support
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
+            closeMenu();
         }
     });
 }
