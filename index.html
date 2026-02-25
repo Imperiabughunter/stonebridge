@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stonebridge Holdings LLC - Invest with Confidence</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                Stonebridge Holdings LLC<span class="accent">.</span>
+            </a>
+            
+            <!-- Desktop Navigation (no dropdown) -->
+            <div class="nav-menu desktop">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="consulting.html" class="nav-link">Consulting</a>
+                <a href="sell.html" class="nav-link">Sell Business</a>
+                <a href="investing.html" class="nav-link">Investing</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            
+            <!-- Mobile Toggle -->
+            <div class="nav-toggle mobile">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <a href="index.html" class="mobile-link">Home</a>
+            <a href="consulting.html" class="mobile-link">Consulting</a>
+            <a href="sell.html" class="mobile-link">Sell Business</a>
+            <a href="investing.html" class="mobile-link">Investing</a>
+            <a href="about.html" class="mobile-link">About</a>
+            <a href="contact.html" class="mobile-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000" alt="Modern Skyscraper">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Invest with Confidence<span class="accent">.</span>
+                </h1>
+                <div class="hero-buttons">
+                    <a href="#contact-section" class="btn-primary hero-btn">Get Started</a>
+                    <a href="about.html" class="btn-secondary hero-btn">Learn More</a>
+                </div>
+                <div class="scroll-indicator">
+                    <div class="scroll-arrow"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="container">
+                <h2 class="section-title fade-in">Welcome to Stonebridge Holdings LLC</h2>
+                <p class="section-text fade-in">
+                    Welcome to Stonebridge Holdings LLC — a modern holdings company
+                    built on strategy, systems, and innovation. We help businesses and
+                    ventures operate smarter, scale with confidence, and create
+                    long-term value through strong operations, financial clarity, and
+                    practical AI solutions. At Stonebridge, our mission is simple:
+                    build efficient companies, empower entrepreneurs, and create
+                    durable wealth for the future.
+                </p>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services-section">
+            <div class="container">
+                <h3 class="section-subtitle fade-in">What are you interested in?</h3>
+                <div class="services-grid">
+                    <a href="consulting.html" class="service-card fade-in">
+                        <h4 class="service-title">Business Consulting</h4>
+                    </a>
+                    <a href="sell.html" class="service-card fade-in">
+                        <h4 class="service-title">Selling your business</h4>
+                    </a>
+                    <a href="investing.html" class="service-card fade-in">
+                        <h4 class="service-title">Partnering/investing</h4>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <div class="section-divider"></div>
+
+        <!-- Contact Section -->
+        <section id="contact-section" class="contact-section">
+            <div class="container">
+                <div class="contact-content">
+                    <div class="contact-header text-center fade-in">
+                        <h3 class="section-title">Contact Us</h3>
+                        <p class="section-text">We would love to hear from you!</p>
+                        <p class="company-name">Stonebridge Holdings LLC</p>
+                        
+                        <button id="contact-toggle" class="btn-primary">Get Started Today</button>
+                    </div>
+
+                    <div id="contact-form" class="contact-form hidden fade-in">
+                        <h4 class="form-title">Get Started Today</h4>
+                        <form id="main-contact-form">
+                            <div class="form-group">
+                                <input type="text" placeholder="Name*" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" placeholder="Phone Number">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Email*" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Tell us more about your goals.*" required rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="attach-btn">Attach Files</button>
+                                <p class="attach-info">Attachments (0)</p>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">Send</button>
+                                <button type="button" id="cancel-contact" class="btn-secondary">Cancel</button>
+                            </div>
+                            <p class="form-note">
+                                This site is protected by reCAPTCHA and the Google Privacy
+                                Policy and Terms of Service apply.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="section-divider"></div>
+
+        <!-- Subscribe Section -->
+        <section class="subscribe-section">
+            <div class="container">
+                <div class="subscribe-content text-center">
+                    <h3 class="section-title light fade-in">Subscribe</h3>
+                    <p class="section-text light fade-in">Get 10% off your first purchase when you sign up for our newsletter!</p>
+                    <div class="subscribe-form fade-in">
+                        <input type="email" placeholder="Email" class="subscribe-input">
+                        <button class="btn-accent">Sign up</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-nav">
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="consulting.html" class="footer-link">Consulting</a>
+                    <a href="sell.html" class="footer-link">Sell Business</a>
+                    <a href="investing.html" class="footer-link">Investing</a>
+                    <a href="about.html" class="footer-link">About</a>
+                    <a href="contact.html" class="footer-link">Contact</a>
+                </div>
+                <p class="copyright">Copyright © 2026 Stonebridge Holdings LLC - All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner hidden">
+        <div class="container">
+            <div class="cookie-content">
+                <div class="cookie-text">
+                    <h3 class="cookie-title">This website uses cookies.</h3>
+                    <p class="cookie-description">
+                        We use cookies to analyze website traffic and optimize your website
+                        experience. By accepting our use of cookies, your data will be
+                        aggregated with all other user data.
+                    </p>
+                </div>
+                <button id="accept-cookies" class="btn-primary">Accept</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
