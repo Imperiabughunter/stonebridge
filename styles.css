@@ -176,6 +176,7 @@ main {
     justify-content: center;
     overflow: hidden;
     min-height: 500px;
+    padding-top: 0;
 }
 
 /* Pages with background images */
@@ -1099,6 +1100,7 @@ body::before {
     .hero {
         height: auto;
         min-height: 70vh;
+        padding-top: 4rem; /* Account for fixed navbar on mobile */
     }
     
     .hero-buttons {
@@ -1141,11 +1143,6 @@ body::before {
     }
     
     /* Ensure hero content is visible on mobile */
-    .hero {
-        height: auto;
-        min-height: 70vh;
-    }
-    
     .hero-content {
         z-index: 3;
         padding-top: 2rem;
@@ -1157,6 +1154,7 @@ body::before {
     
     .hero-content-split {
         z-index: 3;
+        padding-top: 8rem; /* More padding for mobile to account for navbar */
     }
 }
 
@@ -1184,6 +1182,11 @@ body::before {
     
     .hero-description.white-text {
         color: var(--light-text);
+    }
+    
+    /* Add top padding for hero sections on desktop */
+    .hero {
+        padding-top: 0;
     }
     
     .section-title {
@@ -1253,7 +1256,14 @@ body::before {
     grid-template-columns: 1fr;
     gap: 3rem;
     align-items: center;
-    padding: 3rem 0;
+    padding: 7rem 0 3rem 0; /* Add top padding to account for fixed navbar */
+}
+
+/* Desktop view for split layout */
+@media (min-width: 768px) {
+    .hero-content-split {
+        padding-top: 5rem; /* Adjust for navbar on desktop */
+    }
 }
 
 .hero-text {
@@ -1322,6 +1332,31 @@ body::before {
     background-color: white;
     padding: 2rem;
     border: 1px solid var(--border-color);
+}
+
+/* Business Info Section */
+.business-info-section {
+    padding: 4rem 0;
+    background-color: var(--primary-bg);
+    margin: 2rem 0;
+}
+
+.business-card {
+    background-color: white;
+    border: 1px solid var(--border-color);
+    padding: 3rem;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.business-card .section-title {
+    margin-bottom: 1rem;
+    color: var(--primary-text);
+}
+
+.business-card .section-text {
+    color: rgba(26, 26, 26, 0.8);
 }
 
 .business-details {
